@@ -28,17 +28,17 @@ steps:
   args:
   - 'build'
   - '-t'
-  - 'gcr.io/$PROJECT_ID/hello-cloudbuild:$SHORT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/my-repository/hello-cloudbuild:$SHORT_SHA'
   - '.'
 
-# This step pushes the image to Container Registry
+# This step pushes the image to Artifact Registry
 # The PROJECT_ID and SHORT_SHA variables are automatically
 # replaced by Cloud Build.
 - name: 'gcr.io/cloud-builders/docker'
   id: Push
   args:
   - 'push'
-  - 'gcr.io/$PROJECT_ID/hello-cloudbuild:$SHORT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/my-repository/hello-cloudbuild:$SHORT_SHA'
 # [END cloudbuild]
 
 # [START cloudbuild-trigger-cd]
@@ -74,7 +74,7 @@ steps:
     set -x && \
     cd hello-cloudbuild-env && \
     git add kubernetes.yaml && \
-    git commit -m "Deploying image gcr.io/${PROJECT_ID}/hello-cloudbuild:${SHORT_SHA}
+    git commit -m "Deploying image us-central1-docker.pkg.dev/$PROJECT_ID/my-repository/hello-cloudbuild:${SHORT_SHA}
     Built from commit ${COMMIT_SHA} of repository hello-cloudbuild-app
     Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
     git push origin candidate

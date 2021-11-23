@@ -10,14 +10,14 @@ popular in the Kubernetes community. A key part of GitOps is the idea of
 example, Kubernetes manifests) stored in a Git repository.
 
 In this tutorial, you create a CI/CD pipeline that automatically builds a
-container image from commited code, stores the image in Google Container
+container image from commited code, stores the image in Google Artifact
 Registry, updates a Kubernetes manifest in a Git repository and triggers a
 deployment to Kubernetes Engine using that manifest.
 
 This tutorial uses two Git repositories: one for the application —the _app_
 repository— and one for storing the deployment manifests —the _env_ repository.
 When a change is pushed to the application repository, tests are run, a
-container image is built and pushed to Container Registry. Once the image is
+container image is built and pushed to Artifact Registry. Once the image is
 pushed, the deployment manifests are updated to use that new image and they are
 pushed to the _candidate_ branch of the _env_ repository. This triggers the actual
 deployment in Kubernetes. Once the deployment is finished, the new manifests
